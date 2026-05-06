@@ -1,0 +1,18 @@
+# Credentials
+credentials.json
+token.json
+service_account.json
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# App specific
+temp_photos/
+photos/
+*.png
+*.jpg
