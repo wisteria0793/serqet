@@ -26,8 +26,7 @@ DRIVE_FOLDER_ID = os.getenv('DRIVE_FOLDER_ID', '1vK8N0Ea8SQqMEylsKhFOZsB75b0e1q1
 UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'temp_photos')
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def get_credentials():
     creds = None
