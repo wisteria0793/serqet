@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guest Memories - Peace Camera</title>
     <link rel="stylesheet" href="static/css/style.css?v=2.1">
+    <link rel="manifest" href="static/manifest.json">
+    <meta name="theme-color" content="#000000">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.1/qrcode.min.js"></script>
 </head>
@@ -65,5 +67,14 @@
         </div>
     </div>
     <script type="module" src="static/js/main.js?v=2.1"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('static/sw.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker failed', err));
+            });
+        }
+    </script>
 </body>
 </html>
