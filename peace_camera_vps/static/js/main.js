@@ -106,16 +106,28 @@ function init() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ image: capturedImage.src, allow_display: displayPermission.checked })
             });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+                throw new Error(`Upload failed (${res.status}): ${errorText.substring(0, 100)}`);
+            }
+
             const data = await res.json();
             if (data.url) {
-                const qrTarget = window.QRCode || QRCode;
-                qrTarget.toCanvas(qrCanvas, data.url, { width: 250 });
+                if (typeof QRCode !== 'undefined') {
+                    QRCode.toCanvas(qrCanvas, data.url, { width: 250 }, (error) => {
+                        if (error) console.error(error);
+                    });
+                } else {
+                    console.error("QRCode library not loaded");
+                }
                 appState = "PHOTO_TAKEN";
                 resultOverlay.classList.remove("hidden");
                 statusMessage.classList.add("hidden");
             }
         } catch (e) {
-            alert(e);
+            console.error("Upload Error:", e);
+            alert("Error: " + e.message);
             appState = "WAITING";
         }
     });
