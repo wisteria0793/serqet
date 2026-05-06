@@ -1,0 +1,8 @@
+mediapipe
+opencv-python
+numpy
+psutil
+qrcode[pil]
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
